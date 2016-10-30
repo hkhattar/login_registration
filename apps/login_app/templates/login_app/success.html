@@ -1,11 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
+{% load staticfiles %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+      <link rel="stylesheet" href="{% static 'login_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
 	<title>success</title>
 </head>
 <body>
-<h1>Success! Welcome, {{request.session.first_name}}</h1>
-<p>Sucessfully registered</p>
+<div class="container">
+	<div class="header">
+		<h1> Welcome, {{request.session.first_name}}!</h1>
+		<p>Your Trip Schedule</p>
+
+		<table>
+			<thead>
+				<th>Destination</th>
+				<th>Travel Start Date</th>
+				<th>Travel End Date</th>
+				<th>Plan</th>
+				<th>Actions</th>
+			</thead>
+			<br>
+
+			{% for trip in trip_schedule %}
+			<tbody>
+				<td><a href="/show/{{trip.id}}">{{trip.name}}</a></td>
+				<td>{{trip.travel_date_from}}</td>
+				<td>{{trip.travel_date_to}}</td>
+				<td>{{trip.description}}</td>
+				<td><a href="/remove/{{trip.id}}">Remove from my wish list</a></td>
+			</tbody>
+			{% endfor %}
+			</table>
+			<table>
+
+			<p>Other User's Travel Plans</p>
+			<thead>
+				<th>Name</th>
+				<th>Destination</th>
+				<th>Travel Start Date</th>
+				<th>Travel End Date</th>
+				<th>Do You Want to join</th>
+				
+			</thead>
+			<br>
+
+			{% for trip in trip_schedule %}
+			<tbody>
+				<td>{{request.session.first_name}}</td>
+				<td><a href="/show/{{trip.id}}">{{trip.name}}</a></td>
+				<td>{{trip.travel_date_from}}</td>
+				<td>{{trip.travel_date_to}}</td>
+				<td><a href="">Join</a></td>
+				
+			</tbody>
+			{% endfor %}
+		</table>
+
+
+
+
+
+
+
+		
+	</div>
+	<div class="main_content">
+		<form action='/' id="logout">
+		{% csrf_token %}
+		<input  type="submit" name="submit" value="logout">
+		</form>
+		
+	</div>
+	<div>
+	<br>
+		<a href="/create">Add Travel Plan</a>
+	</div>
+</div>
+
+
+
 
 </body>
 </html>

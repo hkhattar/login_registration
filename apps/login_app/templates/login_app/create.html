@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>create</title>
+	{% load staticfiles %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+      <link rel="stylesheet" href="{% static 'login_app/style.css' %}" media="screen" title="no title"  charset="utf-8">
+</head>
+<body>
+<h1>Add a trip</h1>
+<form action="/plan_process" method="post">
+{% csrf_token %}
+	<label>Destination
+		<input type="text" name="destination">
+	</label>
+	<label>Description
+		<input type="text" name="description">
+	</label>
+	<label>Travel Date From
+		<input type="text" name="travel_date_from">
+	</label>
+	<label>Travel Date To
+		<input type="text" name="travel_date_to">
+	</label>
+	<input type="submit" name="submit" value="Add">
+</form>
+
+{% for message in messages %}
+    <p{% if message.tags  == 'info' %} class="{{ message.tags }}" id="messages">{{ message }}{% endif %}</p>
+    {% endfor %}
+
+
+<p><a href="/success">Home</a></p>
+<p><a href="/">Logout</a></p>
+</body>
+</html>

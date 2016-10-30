@@ -1,0 +1,32 @@
+#logout
+{
+	display:inline-block;
+	margin-left: 900px;
+}
+.container
+{
+	display: inline-block;
+}
+.main_content
+{
+	display:inline-block;
+}
+.header
+{
+	display: inline-block;
+}
+
+th
+{
+	padding:10px;
+}
+
+td
+{
+	padding:10px;
+}
+
+h1
+{
+	color:blue;
+}

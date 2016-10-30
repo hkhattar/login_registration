@@ -15,16 +15,21 @@ class UserManager(models.Manager):
 		pass
 
 
-#create your models here.
 class User(models.Model):
 	first_name = models.CharField(max_length=45)
 	last_name = models.CharField(max_length=45)
 	email = models.CharField(max_length=100)
 	password = models.CharField(max_length=100)
-	# confirm_password = models.CharField(max_length=100)
 	created_at = models.DateTimeField(auto_now_add = True)
 	updated_at = models.DateTimeField(auto_now = True)
-	#this is new too!
-	userManager = UserManager()
+	objects = UserManager()
 
-#create models here
+class Destination(models.Model):
+	name = models.CharField(max_length=45)
+	description = models.CharField(max_length=200)
+	# plannedby = models.IntegerField()
+	travel_date_from = models.DateField()
+	travel_date_to = models.DateField()
+	user = models.ManyToManyField(User)
+	created_at= models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now = True)
